@@ -1,0 +1,8 @@
+h1, h2 {
+    font-family: arial;
+    color: white;
+}
+body {
+    background-color: black;
+    padding: 4em;
+}
