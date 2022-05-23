@@ -3,6 +3,8 @@ package com.relatedWords.app.word;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class WordService {
     private WordDAO wordDAO;
@@ -18,5 +20,26 @@ public class WordService {
 
     public void addWord(Word word) {
         wordDAO.addWord(word);
+    }
+
+    public ArrayList<Integer> getRelatedWordIds(String word) {
+        Word targetWord = getWordByTextValue(word);
+        return wordDAO.getRelatedWordIds(targetWord.getId());
+    }
+
+    public ArrayList<Word> getRelatedWords(String word){
+        ArrayList<Integer> relatedIds = getRelatedWordIds(word);
+        System.out.println("related ids" + relatedIds);
+        ArrayList<Word> relatedWords = new ArrayList<>();
+        for (Integer id : relatedIds){
+            Word relatedWord = getWordById(id);
+            relatedWords.add(relatedWord);
+            System.out.println(relatedWord);
+        }
+        return relatedWords;
+    }
+
+    private Word getWordByTextValue(String word) {
+        return wordDAO.getWordByTextValue(word).orElseThrow();
     }
 }

@@ -13,7 +13,7 @@ public class WordRowMapper implements RowMapper<Word> {
     public Word mapRow(ResultSet rs, int rowNum) throws SQLException, IllegalArgumentException {
         Word word = new Word(
                 rs.getInt("id"),
-                rs.getString("value"),
+                rs.getString("text_value"),
                 rs.getString("part_of_speech"),
                 rs.getInt("length")
         );
