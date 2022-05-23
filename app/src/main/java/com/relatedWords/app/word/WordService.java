@@ -11,4 +11,12 @@ public class WordService {
     public WordService(WordDAO wordDAO){
         this.wordDAO = wordDAO;
     }
+
+    public Word getWordById(int id){
+        return wordDAO.getWordById(id).orElseThrow();
+    }
+
+    public void addWord(Word word) {
+        wordDAO.addWord(word);
+    }
 }
