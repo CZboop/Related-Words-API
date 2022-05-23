@@ -29,12 +29,10 @@ public class WordService {
 
     public ArrayList<Word> getRelatedWords(String word){
         ArrayList<Integer> relatedIds = getRelatedWordIds(word);
-        System.out.println("related ids" + relatedIds);
         ArrayList<Word> relatedWords = new ArrayList<>();
         for (Integer id : relatedIds){
             Word relatedWord = getWordById(id);
             relatedWords.add(relatedWord);
-            System.out.println(relatedWord);
         }
         return relatedWords;
     }

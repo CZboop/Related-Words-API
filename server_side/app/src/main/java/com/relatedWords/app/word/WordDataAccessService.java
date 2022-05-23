@@ -49,7 +49,7 @@ public class WordDataAccessService implements WordDAO {
     @Override
     public ArrayList<Integer> getRelatedWordIds(int id){
         String sql = """
-                SELECT * FROM semantic_similar WHERE id = ?;
+                SELECT word2_id FROM semantic_similar WHERE word1_id = ?;
                 """;
         return (ArrayList<Integer>) jdbcTemplate.query(sql, relatedWordIdExtractor, id);
 

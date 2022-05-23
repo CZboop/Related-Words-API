@@ -4,5 +4,6 @@ public enum POS {
     NOUN,
     VERB,
     ADJECTIVE,
-    ADVERB
+    ADVERB,
+    NULL
 }

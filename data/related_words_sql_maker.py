@@ -48,12 +48,12 @@ class RelatedWordsSQLMaker:
         if not self.related_words:
             self.get_all_related_words()
         related_words = self.related_words.get(word)
-        # print(related_words)
+
         related_word_statements = []
         for related_word in related_words:
             if related_word not in self.all_words:
                 continue
-            insert_statement = f"INSERT INTO semantic_similar (word1_id, word2_id) VALUES ({self.all_words.index(word)}, {self.all_words.index(related_word)});\n"
+            insert_statement = f"INSERT INTO semantic_similar (word1_id, word2_id) VALUES ({self.all_words.index(word) + 1}, {self.all_words.index(related_word) + 1});\n"
             related_word_statements.append(insert_statement)
         return related_word_statements
 
