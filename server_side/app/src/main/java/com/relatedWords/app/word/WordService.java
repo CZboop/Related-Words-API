@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class WordService {
@@ -46,5 +48,13 @@ public class WordService {
         ArrayList<Integer> relatedIds = getRelatedWordIds(word);
         int targetId = relatedIds.get((int) (Math.random()*relatedIds.size()));
         return getWordById(targetId);
+    }
+
+    public ArrayList<Word> getRelatedWordsSamePOS(String word) {
+        Word targetWord = getWordByTextValue(word);
+        List<Word> wordList = getRelatedWords(word).stream().filter(
+                (w) -> w.getPartOfSpeech() == targetWord.getPartOfSpeech()).collect(Collectors.toList());
+        ArrayList<Word> wordArrayList = new ArrayList<Word>(wordList);
+        return wordArrayList;
     }
 }

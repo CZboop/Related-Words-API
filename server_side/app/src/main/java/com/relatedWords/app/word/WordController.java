@@ -34,4 +34,9 @@ public class WordController {
     public Word getRandomRelatedWord(@PathVariable String word){
         return wordService.getRandomRelatedWord(word);
     }
+
+    @GetMapping("related/{word}/pos")
+    public ArrayList<Word> getRelatedWordsSamePOS(@PathVariable String word){
+        return wordService.getRelatedWordsSamePOS(word);
+    }
 }
