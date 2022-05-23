@@ -28,7 +28,7 @@ public class WordDataAccessService implements WordDAO {
     @Override
     public void addWord(Word word){
         String sql = """
-                INSERT INTO words (value, part_of_speech, length) VALUES (?, ?, ?);
+                INSERT INTO words (text_value, part_of_speech, length) VALUES (?, ?, ?);
                 """;
         jdbcTemplate.update(sql, word.getValue(), word.getPartOfSpeech().name(), word.getLength());
     }
