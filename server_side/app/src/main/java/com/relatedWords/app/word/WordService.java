@@ -1,5 +1,6 @@
 package com.relatedWords.app.word;
 
+import com.relatedWords.app.exception.ResourceNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ public class WordService {
     }
 
     public Word getWordById(int id){
-        return wordDAO.getWordById(id).orElseThrow();
+        return wordDAO.getWordById(id).orElseThrow(() -> new ResourceNotFound(String.format("No word found with id %s", id)));
     }
 
     public void addWord(Word word) {
@@ -38,7 +39,7 @@ public class WordService {
     }
 
     private Word getWordByTextValue(String word) {
-        return wordDAO.getWordByTextValue(word).orElseThrow();
+        return wordDAO.getWordByTextValue(word).orElseThrow(() -> new ResourceNotFound(String.format("Could not find the word \'%s\'", word)) );
     }
 
     public Word getRandomRelatedWord(String word) {
