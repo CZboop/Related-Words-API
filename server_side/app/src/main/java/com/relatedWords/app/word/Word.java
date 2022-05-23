@@ -18,4 +18,20 @@ public class Word {
         this.partOfSpeech = POS.valueOf(partOfSpeech.toUpperCase());
         this.length = value.length();
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public POS getPartOfSpeech() {
+        return partOfSpeech;
+    }
+
+    public int getLength() {
+        return length;
+    }
 }
