@@ -40,4 +40,10 @@ public class WordService {
     private Word getWordByTextValue(String word) {
         return wordDAO.getWordByTextValue(word).orElseThrow();
     }
+
+    public Word getRandomRelatedWord(String word) {
+        ArrayList<Integer> relatedIds = getRelatedWordIds(word);
+        int targetId = relatedIds.get((int) (Math.random()*relatedIds.size()));
+        return getWordById(targetId);
+    }
 }
