@@ -26,10 +26,9 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="d7561080-de47-4592-8ce9-4c0ce0820c21">
-        <schema name="information_schema" object-types="table, view, sequence, function" />
-        <schema name="pg_catalog" object-types="table, view, sequence, function" />
-        <schema name="pg_toast" object-types="table, view, sequence, function" />
-        <schema name="public" object-types="table, view, sequence, function" />
+        <schema name="information_schema" object-types="table, view" />
+        <schema name="pg_catalog" object-types="table, view" />
+        <schema name="public" object-types="table, view" />
       </connection>
     </loaded-nodes>
   </component>
@@ -51,6 +50,8 @@
     <retain-sticky-names value="false" />
   </component>
   <component name="DBNavigator.Project.FileConnectionMappingManager">
+    <mapping file-url="file://$PROJECT_DIR$/server_side/app/src/main/resources/db/migration/V2__Insert_Words.sql" connection-id="d7561080-de47-4592-8ce9-4c0ce0820c21" session-id="MAIN" current-schema="public" />
+    <mapping file-url="file://$PROJECT_DIR$/server_side/app/src/main/resources/db/migration/V3__Insert_Related.sql" connection-id="d7561080-de47-4592-8ce9-4c0ce0820c21" session-id="MAIN" current-schema="public" />
     <mapping file-url="file://$PROJECT_DIR$/server_side/app/src/main/resources/db/migration/V1_1__.sql" connection-id="d7561080-de47-4592-8ce9-4c0ce0820c21" session-id="MAIN" current-schema="public" />
   </component>
   <component name="DBNavigator.Project.MethodExecutionManager">
