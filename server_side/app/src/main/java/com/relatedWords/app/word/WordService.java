@@ -27,7 +27,9 @@ public class WordService {
 
     public ArrayList<Integer> getRelatedWordIds(String word) {
         Word targetWord = getWordByTextValue(word);
-        return wordDAO.getRelatedWordIds(targetWord.getId());
+        return wordDAO.getRelatedWordIds(targetWord.getId()).orElseThrow(
+                () -> new ResourceNotFound(String.format("Could not find the word \'%s\'", word))
+        );
     }
 
     public ArrayList<Word> getRelatedWords(String word){

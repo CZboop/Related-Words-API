@@ -64,7 +64,7 @@ public class WordServiceTests {
                 .map((w)->w.getId()).collect(Collectors.toList());
 
         when(mockWordRepository.getWordByTextValue("word")).thenReturn(Optional.of(word1));
-        when(mockWordRepository.getRelatedWordIds(word1.getId())).thenReturn((ArrayList<Integer>) relatedIds);
+        when(mockWordRepository.getRelatedWordIds(word1.getId())).thenReturn(Optional.of((ArrayList<Integer>) relatedIds));
         when(mockWordRepository.getWordById(word2.getId())).thenReturn(Optional.of(word2));
         when(mockWordRepository.getWordById(word3.getId())).thenReturn(Optional.of(word3));
 
@@ -87,7 +87,7 @@ public class WordServiceTests {
                 .map((w)->w.getId()).collect(Collectors.toList());
 
         when(mockWordRepository.getWordByTextValue("word")).thenReturn(Optional.of(word1));
-        when(mockWordRepository.getRelatedWordIds(word1.getId())).thenReturn((ArrayList<Integer>) relatedIds);
+        when(mockWordRepository.getRelatedWordIds(word1.getId())).thenReturn(Optional.of((ArrayList<Integer>) relatedIds));
         when(mockWordRepository.getWordById(word2.getId())).thenReturn(Optional.of(word2));
         when(mockWordRepository.getWordById(word3.getId())).thenReturn(Optional.of(word3));
 
@@ -110,7 +110,7 @@ public class WordServiceTests {
                 .map((w)->w.getId()).collect(Collectors.toList());
 
         when(mockWordRepository.getWordByTextValue("word")).thenReturn(Optional.of(word1));
-        when(mockWordRepository.getRelatedWordIds(word1.getId())).thenReturn((ArrayList<Integer>) relatedIds);
+        when(mockWordRepository.getRelatedWordIds(word1.getId())).thenReturn(Optional.of((ArrayList<Integer>) relatedIds));
         when(mockWordRepository.getWordById(word2.getId())).thenReturn(Optional.of(word2));
         when(mockWordRepository.getWordById(word3.getId())).thenReturn(Optional.of(word3));
 
@@ -133,7 +133,7 @@ public class WordServiceTests {
                 .map((w)->w.getId()).collect(Collectors.toList());
 
         when(mockWordRepository.getWordByTextValue("word")).thenReturn(Optional.of(word1));
-        when(mockWordRepository.getRelatedWordIds(word1.getId())).thenReturn((ArrayList<Integer>) relatedIds);
+        when(mockWordRepository.getRelatedWordIds(word1.getId())).thenReturn(Optional.of((ArrayList<Integer>) relatedIds));
         when(mockWordRepository.getWordById(word2.getId())).thenReturn(Optional.of(word2));
         when(mockWordRepository.getWordById(word3.getId())).thenReturn(Optional.of(word3));
 
@@ -185,8 +185,8 @@ public class WordServiceTests {
 
         when(mockWordRepository.getWordByTextValue("word")).thenReturn(Optional.of(word1));
 
-        when(mockWordRepository.getRelatedWordIds(word1.getId())).thenReturn((ArrayList<Integer>) relatedIds);
-        ArrayList<Integer> expected = mockWordRepository.getRelatedWordIds(1);
+        when(mockWordRepository.getRelatedWordIds(word1.getId())).thenReturn(Optional.of((ArrayList<Integer>) relatedIds));
+        ArrayList<Integer> expected = mockWordRepository.getRelatedWordIds(1).get();
 
         ArrayList<Integer> actual = underTest.getRelatedWordIds(word1.getValue());
 
@@ -196,31 +196,73 @@ public class WordServiceTests {
     //     get related word ids - failure
     @Test
     void gettingRelatedWordIdsForInvalidWordReturnsCorrectException(){
+        String invalidWord = "NaN";
 
+        assertThatThrownBy(() -> underTest.getRelatedWordIds(invalidWord))
+                .isInstanceOf(ResourceNotFound.class)
+                .hasMessageContaining(String.format("Could not find the word \'%s\'", invalidWord) );
     }
 
     //     get related word same pos - success
     @Test
     void gettingWordWithSamePOSReturnsWordWithSamePOS(){
+        Word word1 = new Word(1,"word", "noun", "word".length());
+        Word word2 = new Word(2,"sentence", "noun", "sentence".length());
+        Word word3 = new Word(3,"text", "verb", "text".length());
 
+        Word targetWord = new Word(4,"message", "verb", "message".length());
+
+        ArrayList<Word> mockWords = new ArrayList<>(Arrays.asList(word2, word3));
+        List<Integer> relatedIds = mockWords.stream()
+                .map((w)->w.getId()).collect(Collectors.toList());
+
+        when(mockWordRepository.getWordByTextValue("message")).thenReturn(Optional.of(targetWord));
+        when(mockWordRepository.getRelatedWordIds(targetWord.getId())).thenReturn(Optional.of((ArrayList<Integer>) relatedIds));
+        when(mockWordRepository.getWordById(1)).thenReturn(Optional.of(word1));
+        when(mockWordRepository.getWordById(2)).thenReturn(Optional.of(word2));
+        when(mockWordRepository.getWordById(3)).thenReturn(Optional.of(word3));
+
+        ArrayList<Word> expected = new ArrayList<>(List.of(word3));
+
+        ArrayList<Word> actual = underTest.getRelatedWordsSamePOS(targetWord.getValue());
+
+        assertEquals(actual, expected);
     }
+
     //     get related word same pos - failure
     @Test
-    void gettingInvalidWordWithSamePOSThrowsCorrectError(){}
+    void gettingInvalidWordWithSamePOSThrowsCorrectError(){
+        Word word1 = new Word(1,"word", "noun", "word".length());
+        Word word2 = new Word(2,"sentence", "noun", "sentence".length());
+        Word word3 = new Word(3,"text", "noun", "text".length());
+
+        Word targetWord = new Word(4,"message", "verb", "message".length());
+
+        ArrayList<Word> mockWords = new ArrayList<>(Arrays.asList(word2, word3));
+        List<Integer> relatedIds = mockWords.stream()
+                .map((w)->w.getId()).collect(Collectors.toList());
+
+        when(mockWordRepository.getWordByTextValue("message")).thenReturn(Optional.of(targetWord));
+        when(mockWordRepository.getRelatedWordIds(targetWord.getId())).thenReturn(Optional.of((ArrayList<Integer>) relatedIds));
+        when(mockWordRepository.getWordById(1)).thenReturn(Optional.of(word1));
+        when(mockWordRepository.getWordById(2)).thenReturn(Optional.of(word2));
+        when(mockWordRepository.getWordById(3)).thenReturn(Optional.of(word3));
+
+        ArrayList<Word> actual = underTest.getRelatedWordsSamePOS(targetWord.getValue());
+
+        ArrayList<Word> expected = new ArrayList<>();
+        assertEquals(actual, expected);
+    }
 
     //     add word - success
     @Test
-    void successFullyAddingWordReturnsNumberOfRowsAdded(){
+    void successFullyAddingWordReturnsNumberOfRowsAddedAsReturnedByDAO(){
+        Word wordToAdd = new Word(1,"word", "noun", "word".length());
+        when(mockWordRepository.addWord(wordToAdd)).thenReturn(1);
 
+        int actual = underTest.addWord(wordToAdd);
+        int expected = 1;
+
+        assertEquals(actual, expected);
     }
-
-    //    add word - failure
-    @Test
-    void failureToAddWordReturnsNumberOfRowsAdded(){
-
-    }
-
-
-
-
 }

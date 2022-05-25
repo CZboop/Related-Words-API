@@ -8,7 +8,7 @@ public interface WordDAO {
 
     int addWord(Word word);
 
-    ArrayList<Integer> getRelatedWordIds(int id);
+    Optional<ArrayList<Integer>> getRelatedWordIds(int id);
 
     Optional<Word> getWordByTextValue(String word);
 }
