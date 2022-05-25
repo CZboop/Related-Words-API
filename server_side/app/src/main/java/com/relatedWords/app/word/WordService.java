@@ -40,7 +40,7 @@ public class WordService {
         return relatedWords;
     }
 
-    private Word getWordByTextValue(String word) {
+    public Word getWordByTextValue(String word) {
         return wordDAO.getWordByTextValue(word).orElseThrow(() -> new ResourceNotFound(String.format("Could not find the word \'%s\'", word)) );
     }
 
