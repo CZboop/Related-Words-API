@@ -41,7 +41,8 @@ public class WordService {
     }
 
     public Word getWordByTextValue(String word) {
-        return wordDAO.getWordByTextValue(word).orElseThrow(() -> new ResourceNotFound(String.format("Could not find the word \'%s\'", word)) );
+        return wordDAO.getWordByTextValue(word).orElseThrow(
+                () -> new ResourceNotFound(String.format("Could not find the word \'%s\'", word)) );
     }
 
     public Word getRandomRelatedWord(String word) {

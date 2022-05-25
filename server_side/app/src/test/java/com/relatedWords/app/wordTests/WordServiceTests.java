@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -31,27 +32,117 @@ public class WordServiceTests {
 
     //     get word by id - success
     @Test
-    void gettingValidWordByIdReturnsCorrespondingWord(){}
+    void gettingValidWordByIdReturnsCorrespondingWord(){
+        Word word1 = new Word(1,"word", "noun", "word".length());
+
+        when(mockWordRepository.getWordById(1)).thenReturn(Optional.of(word1));
+
+        Word expected = mockWordRepository.getWordById(1).get();
+        Word actual = underTest.getWordById(1);
+
+        assertEquals(actual, expected);
+    }
 
     //     get word by id - failure
     @Test
-    void gettingInvalidWordByIdThrowsCorrectError(){}
+    void gettingInvalidWordByIdThrowsCorrectError(){
+        int id = 0;
+
+        assertThatThrownBy(() -> underTest.getWordById(id))
+                .isInstanceOf(ResourceNotFound.class).hasMessageContaining(String.format("No word found with id %s", id));
+    }
 
     //     get related words - success
     @Test
-    void gettingRelatedWordsForValidWordReturnsArrayListReturnedByDAO(){}
+    void gettingRelatedWordsForValidWordReturnsArrayListReturnedByDAO(){
+        Word word1 = new Word(1,"word", "noun", "word".length());
+        Word word2 = new Word(2,"sentence", "noun", "sentence".length());
+        Word word3 = new Word(3,"text", "noun", "text".length());
+
+        ArrayList<Word> mockWords = new ArrayList<>(Arrays.asList(word2, word3));
+        List<Integer> relatedIds = mockWords.stream()
+                .map((w)->w.getId()).collect(Collectors.toList());
+
+        when(mockWordRepository.getWordByTextValue("word")).thenReturn(Optional.of(word1));
+        when(mockWordRepository.getRelatedWordIds(word1.getId())).thenReturn((ArrayList<Integer>) relatedIds);
+        when(mockWordRepository.getWordById(word2.getId())).thenReturn(Optional.of(word2));
+        when(mockWordRepository.getWordById(word3.getId())).thenReturn(Optional.of(word3));
+
+        ArrayList<Word> expected = (ArrayList<Word>) relatedIds.stream().map(
+                (i) -> mockWordRepository.getWordById(i).get()).collect(Collectors.toList());
+        ArrayList<Word> actual = underTest.getRelatedWords(word1.getValue());
+
+        assertEquals(actual, expected);
+    }
 
     //     get related words - failure
     @Test
-    void gettingRelatedWordsForInvalidWordThrowsCorrectError(){}
+    void gettingRelatedWordsForInvalidWordThrowsCorrectError(){
+        Word word1 = new Word(1,"word", "noun", "word".length());
+        Word word2 = new Word(2,"sentence", "noun", "sentence".length());
+        Word word3 = new Word(3,"text", "noun", "text".length());
+
+        ArrayList<Word> mockWords = new ArrayList<>(Arrays.asList(word2, word3));
+        List<Integer> relatedIds = mockWords.stream()
+                .map((w)->w.getId()).collect(Collectors.toList());
+
+        when(mockWordRepository.getWordByTextValue("word")).thenReturn(Optional.of(word1));
+        when(mockWordRepository.getRelatedWordIds(word1.getId())).thenReturn((ArrayList<Integer>) relatedIds);
+        when(mockWordRepository.getWordById(word2.getId())).thenReturn(Optional.of(word2));
+        when(mockWordRepository.getWordById(word3.getId())).thenReturn(Optional.of(word3));
+
+        String word = "worddd";
+
+        assertThatThrownBy(() -> underTest.getRelatedWords(word))
+                .isInstanceOf(ResourceNotFound.class)
+                .hasMessageContaining(String.format("Could not find the word \'%s\'", word));
+    }
 
     //     get random related word - success
     @Test
-    void gettingRandomRelatedWordForValidWordReturnsOneOfTheRelatedWords(){}
+    void gettingRandomRelatedWordForValidWordReturnsOneOfTheRelatedWords(){
+        Word word1 = new Word(1,"word", "noun", "word".length());
+        Word word2 = new Word(2,"sentence", "noun", "sentence".length());
+        Word word3 = new Word(3,"text", "noun", "text".length());
+
+        ArrayList<Word> mockWords = new ArrayList<>(Arrays.asList(word2, word3));
+        List<Integer> relatedIds = mockWords.stream()
+                .map((w)->w.getId()).collect(Collectors.toList());
+
+        when(mockWordRepository.getWordByTextValue("word")).thenReturn(Optional.of(word1));
+        when(mockWordRepository.getRelatedWordIds(word1.getId())).thenReturn((ArrayList<Integer>) relatedIds);
+        when(mockWordRepository.getWordById(word2.getId())).thenReturn(Optional.of(word2));
+        when(mockWordRepository.getWordById(word3.getId())).thenReturn(Optional.of(word3));
+
+        ArrayList<Word> allRelated = (ArrayList<Word>) relatedIds.stream().map(
+                (i) -> mockWordRepository.getWordById(i).get()).collect(Collectors.toList());
+        Word actual = underTest.getRandomRelatedWord(word1.getValue());
+
+        assertTrue(allRelated.stream().anyMatch(item -> actual.equals(item)));
+    }
 
     //     get random related word - failure
     @Test
-    void gettingRandomRelatedWordForInvalidWordThrowsException(){}
+    void gettingRandomRelatedWordForInvalidWordThrowsException(){
+        Word word1 = new Word(1,"word", "noun", "word".length());
+        Word word2 = new Word(2,"sentence", "noun", "sentence".length());
+        Word word3 = new Word(3,"text", "noun", "text".length());
+
+        ArrayList<Word> mockWords = new ArrayList<>(Arrays.asList(word2, word3));
+        List<Integer> relatedIds = mockWords.stream()
+                .map((w)->w.getId()).collect(Collectors.toList());
+
+        when(mockWordRepository.getWordByTextValue("word")).thenReturn(Optional.of(word1));
+        when(mockWordRepository.getRelatedWordIds(word1.getId())).thenReturn((ArrayList<Integer>) relatedIds);
+        when(mockWordRepository.getWordById(word2.getId())).thenReturn(Optional.of(word2));
+        when(mockWordRepository.getWordById(word3.getId())).thenReturn(Optional.of(word3));
+
+        String invalidWord = "NaN";
+
+        assertThatThrownBy(() -> underTest.getRandomRelatedWord(invalidWord))
+                .isInstanceOf(ResourceNotFound.class)
+                .hasMessageContaining(String.format("Could not find the word \'%s\'", invalidWord));
+    }
 
     //     get word by text value - success
     @Test

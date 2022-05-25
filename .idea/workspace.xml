@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5176d752-4e8d-4711-be36-47ac58b91f63" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server_side/app/src/main/java/com/relatedWords/app/word/WordDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server_side/app/src/main/java/com/relatedWords/app/word/WordDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server_side/app/src/main/java/com/relatedWords/app/word/WordDataAccessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server_side/app/src/main/java/com/relatedWords/app/word/WordDataAccessService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server_side/app/src/main/java/com/relatedWords/app/word/WordService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server_side/app/src/main/java/com/relatedWords/app/word/WordService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server_side/app/src/test/java/com/relatedWords/app/wordTests/WordServiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/server_side/app/src/test/java/com/relatedWords/app/wordTests/WordServiceTests.java" afterDir="false" />
     </list>
@@ -47,23 +45,8 @@
       <recent name="C:\Users\zeina\Documents\codin\java\relatedWordsAPI\server_side\app\src\main\resources\db\migration" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.WordServiceTests.gettingValidWordReturnsCorrespondingWord">
-    <configuration name="AppApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="app" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.relatedWords.app.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.relatedWords.app" />
-      <option name="MAIN_CLASS_NAME" value="com.relatedWords.app.AppApplicationTests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="WordServiceTests.gettingRelatedWordIdForValidWordReturnsSameArraylistOfWordIdsAsDAO" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.WordServiceTests.gettingRandomRelatedWordForInvalidWordThrowsException">
+    <configuration name="WordServiceTests.gettingInvalidWordByIdThrowsCorrectError" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="app" />
       <extension name="coverage">
         <pattern>
@@ -73,13 +56,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.relatedWords.app.wordTests" />
       <option name="MAIN_CLASS_NAME" value="com.relatedWords.app.wordTests.WordServiceTests" />
-      <option name="METHOD_NAME" value="gettingRelatedWordIdForValidWordReturnsSameArraylistOfWordIdsAsDAO" />
+      <option name="METHOD_NAME" value="gettingInvalidWordByIdThrowsCorrectError" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WordServiceTests.gettingValidWordReturnsCorrespondingWord" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="WordServiceTests.gettingRandomRelatedWordForInvalidWordThrowsException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="app" />
       <extension name="coverage">
         <pattern>
@@ -89,13 +72,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.relatedWords.app.wordTests" />
       <option name="MAIN_CLASS_NAME" value="com.relatedWords.app.wordTests.WordServiceTests" />
-      <option name="METHOD_NAME" value="gettingValidWordReturnsCorrespondingWord" />
+      <option name="METHOD_NAME" value="gettingRandomRelatedWordForInvalidWordThrowsException" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WordServiceTests.gettingWordWithInvalidIdThrowsException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="WordServiceTests.gettingRandomRelatedWordForValidWordReturnsOneOfTheRelatedWords" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="app" />
       <extension name="coverage">
         <pattern>
@@ -105,13 +88,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.relatedWords.app.wordTests" />
       <option name="MAIN_CLASS_NAME" value="com.relatedWords.app.wordTests.WordServiceTests" />
-      <option name="METHOD_NAME" value="gettingWordWithInvalidIdThrowsException" />
+      <option name="METHOD_NAME" value="gettingRandomRelatedWordForValidWordReturnsOneOfTheRelatedWords" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WordServiceTests.gettingWordWithValidIdReturnsOptionalOfCorrespondingWord" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="WordServiceTests.gettingRelatedWordsForInvalidWordThrowsCorrectError" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="app" />
       <extension name="coverage">
         <pattern>
@@ -121,7 +104,23 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.relatedWords.app.wordTests" />
       <option name="MAIN_CLASS_NAME" value="com.relatedWords.app.wordTests.WordServiceTests" />
-      <option name="METHOD_NAME" value="gettingWordWithValidIdReturnsOptionalOfCorrespondingWord" />
+      <option name="METHOD_NAME" value="gettingRelatedWordsForInvalidWordThrowsCorrectError" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WordServiceTests.gettingRelatedWordsForValidWordReturnsArrayListReturnedByDAO" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.relatedWords.app.wordTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.relatedWords.app.wordTests" />
+      <option name="MAIN_CLASS_NAME" value="com.relatedWords.app.wordTests.WordServiceTests" />
+      <option name="METHOD_NAME" value="gettingRelatedWordsForValidWordReturnsArrayListReturnedByDAO" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -129,11 +128,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.WordServiceTests.gettingValidWordReturnsCorrespondingWord" />
-        <item itemvalue="JUnit.WordServiceTests.gettingWordWithInvalidIdThrowsException" />
-        <item itemvalue="JUnit.WordServiceTests.gettingWordWithValidIdReturnsOptionalOfCorrespondingWord" />
-        <item itemvalue="JUnit.WordServiceTests.gettingRelatedWordIdForValidWordReturnsSameArraylistOfWordIdsAsDAO" />
-        <item itemvalue="JUnit.AppApplicationTests" />
+        <item itemvalue="JUnit.WordServiceTests.gettingRandomRelatedWordForInvalidWordThrowsException" />
+        <item itemvalue="JUnit.WordServiceTests.gettingRandomRelatedWordForValidWordReturnsOneOfTheRelatedWords" />
+        <item itemvalue="JUnit.WordServiceTests.gettingRelatedWordsForInvalidWordThrowsCorrectError" />
+        <item itemvalue="JUnit.WordServiceTests.gettingRelatedWordsForValidWordReturnsArrayListReturnedByDAO" />
+        <item itemvalue="JUnit.WordServiceTests.gettingInvalidWordByIdThrowsCorrectError" />
       </list>
     </recent_temporary>
   </component>
