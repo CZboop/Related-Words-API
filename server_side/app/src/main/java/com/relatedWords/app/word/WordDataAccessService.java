@@ -6,7 +6,6 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -31,11 +30,11 @@ public class WordDataAccessService implements WordDAO {
     }
 
     @Override
-    public void addWord(Word word){
+    public int addWord(Word word){
         String sql = """
                 INSERT INTO words (text_value, part_of_speech, length) VALUES (?, ?, ?);
                 """;
-        jdbcTemplate.update(sql, word.getValue(), word.getPartOfSpeech().name(), word.getLength());
+        return jdbcTemplate.update(sql, word.getValue(), word.getPartOfSpeech().name(), word.getLength());
     }
 
     @Override

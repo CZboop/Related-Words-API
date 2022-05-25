@@ -29,11 +29,34 @@ public class WordServiceTests {
         underTest = new WordService(mockWordRepository);
     }
 
+    //     get word by id - success
     @Test
-    void gettingWordWithValidIdReturnsOptionalOfCorrespondingWord(){
+    void gettingValidWordByIdReturnsCorrespondingWord(){}
+
+    //     get word by id - failure
+    @Test
+    void gettingInvalidWordByIdThrowsCorrectError(){}
+
+    //     get related words - success
+    @Test
+    void gettingRelatedWordsForValidWordReturnsArrayListReturnedByDAO(){}
+
+    //     get related words - failure
+    @Test
+    void gettingRelatedWordsForInvalidWordThrowsCorrectError(){}
+
+    //     get random related word - success
+    @Test
+    void gettingRandomRelatedWordForValidWordReturnsOneOfTheRelatedWords(){}
+
+    //     get random related word - failure
+    @Test
+    void gettingRandomRelatedWordForInvalidWordThrowsException(){}
+
+    //     get word by text value - success
+    @Test
+    void gettingValidWordReturnsCorrespondingWord(){
         Word word1 = new Word(1,"word", "noun", "word".length());
-        Word word2 = new Word(2,"sentence", "noun", "sentence".length());
-        Word word3 = new Word(3,"text", "noun", "text".length());
 
         when(mockWordRepository.getWordByTextValue("word")).thenReturn(Optional.of(word1));
 
@@ -43,6 +66,7 @@ public class WordServiceTests {
         assertEquals(actual, expected);
     }
 
+    //     get word by text value - failure
     @Test
     void gettingInvalidWordThrowsCorrectException(){
         Word word1 = new Word(1,"word", "noun", "word".length());
@@ -57,8 +81,9 @@ public class WordServiceTests {
                 .isInstanceOf(ResourceNotFound.class).hasMessageContaining(String.format("Could not find the word \'%s\'", word));
     }
 
+    //     get related word ids - success
     @Test
-    void gettingRelatedWordIdForValidWordReturnsSameArraylistOfWordIdsAsDAO(){
+    void gettingRelatedWordIdsForValidWordReturnsSameArraylistOfWordIdsAsDAO(){
         Word word1 = new Word(1,"word", "noun", "word".length());
         Word word2 = new Word(2,"sentence", "noun", "sentence".length());
         Word word3 = new Word(3,"text", "noun", "text".length());
@@ -76,6 +101,35 @@ public class WordServiceTests {
 
         assertEquals(actual, expected);
     }
+
+    //     get related word ids - failure
+    @Test
+    void gettingRelatedWordIdsForInvalidWordReturnsCorrectException(){
+
+    }
+
+    //     get related word same pos - success
+    @Test
+    void gettingWordWithSamePOSReturnsWordWithSamePOS(){
+
+    }
+    //     get related word same pos - failure
+    @Test
+    void gettingInvalidWordWithSamePOSThrowsCorrectError(){}
+
+    //     add word - success
+    @Test
+    void successFullyAddingWordReturnsNumberOfRowsAdded(){
+
+    }
+
+    //    add word - failure
+    @Test
+    void failureToAddWordReturnsNumberOfRowsAdded(){
+
+    }
+
+
 
 
 }

@@ -6,7 +6,7 @@ import java.util.Optional;
 public interface WordDAO {
     Optional<Word> getWordById(int id);
 
-    void addWord(Word word);
+    int addWord(Word word);
 
     ArrayList<Integer> getRelatedWordIds(int id);
 

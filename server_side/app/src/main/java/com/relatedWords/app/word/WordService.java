@@ -21,8 +21,8 @@ public class WordService {
         return wordDAO.getWordById(id).orElseThrow(() -> new ResourceNotFound(String.format("No word found with id %s", id)));
     }
 
-    public void addWord(Word word) {
-        wordDAO.addWord(word);
+    public int addWord(Word word) {
+        return wordDAO.addWord(word);
     }
 
     public ArrayList<Integer> getRelatedWordIds(String word) {
