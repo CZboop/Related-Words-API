@@ -96,13 +96,13 @@ public class WordService {
     public HashMap<String, Integer> getNWordsNumberOfMatchingLetters(String word, int n) {
         HashMap<String, Integer> allMatches = getWordsNumberOfMatchingLetters(word);
         int mapSize = allMatches.size();
-        if (mapSize >= n){
+        if (mapSize > 0 ){
             return (HashMap<String, Integer>) allMatches.entrySet().stream()
                     .limit(n)
                     .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
         }
         else {
-            throw new ResourceNotFound(String.format("Only %s matching words for \'%s\'", mapSize, word));
+            throw new ResourceNotFound(String.format("No matching words for \'%s\'", word));
         }
     }
 
@@ -120,5 +120,18 @@ public class WordService {
             matchWPositions.put(comparisonWord, matchInds);
         }
         return matchWPositions;
+    }
+
+    public HashMap<String, ArrayList> getNWordsPositionOfMatchingLetters(String word, int n){
+        HashMap<String, ArrayList> allMatches = getWordsPositionOfMatchingLetters(word);
+        int mapSize = allMatches.size();
+        if (mapSize > 0){
+            return (HashMap<String, ArrayList>) allMatches.entrySet().stream()
+                    .limit(n)
+                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        }
+        else {
+            throw new ResourceNotFound(String.format("No matching words for \'%s\'", word));
+        }
     }
 }

@@ -46,7 +46,7 @@ public class WordController {
         return wordService.getWordsNumberOfMatchingLetters(word);
     }
 
-    @GetMapping("/letters/{word}/{n}")
+    @GetMapping("/letters/{word}/limit={n}")
     public HashMap<String, Integer> getNWordsNumberOfMatchingLetters(@PathVariable String word, @PathVariable int n){
         return wordService.getNWordsNumberOfMatchingLetters(word, n);
     }
@@ -54,5 +54,10 @@ public class WordController {
     @GetMapping("/letters/pos/{word}")
     public HashMap<String, ArrayList> getWordsPositionOfMatchingLetters(@PathVariable String word){
         return wordService.getWordsPositionOfMatchingLetters(word);
+    }
+
+    @GetMapping("/letters/pos/{word}/limit={n}")
+    public HashMap<String, ArrayList> getNWordsPositionOfMatchingLetters(@PathVariable String word, @PathVariable int n){
+        return wordService.getNWordsPositionOfMatchingLetters(word, n);
     }
 }
