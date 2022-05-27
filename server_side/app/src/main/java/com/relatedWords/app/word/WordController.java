@@ -45,4 +45,9 @@ public class WordController {
     public HashMap<String, Integer> getWordsNumberOfMatchingLetters(@PathVariable String word){
         return wordService.getWordsNumberOfMatchingLetters(word);
     }
+
+    @GetMapping("/letters/{word}/{n}")
+    public HashMap<String, Integer> getNWordsNumberOfMatchingLetters(@PathVariable String word, @PathVariable int n){
+        return wordService.getNWordsNumberOfMatchingLetters(word, n);
+    }
 }

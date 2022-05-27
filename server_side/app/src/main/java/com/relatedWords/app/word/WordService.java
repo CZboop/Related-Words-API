@@ -83,7 +83,25 @@ public class WordService {
             }
             letterOverlaps.put(comparisonWord, letterMatchCount);
         }
-        return (HashMap<String, Integer>) letterOverlaps.entrySet().stream().filter(a->a.getValue() > 0)
+        HashMap<String, Integer> haveLetterOverlaps = (HashMap<String, Integer>) letterOverlaps.entrySet().stream()
+                .filter(a->a.getValue() > 0)
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        if (haveLetterOverlaps.size() > 0){
+            return haveLetterOverlaps;
+        }
+        throw new ResourceNotFound(String.format("No words with letter overlaps for \'%s\'", word));
+    }
+
+    public HashMap<String, Integer> getNWordsNumberOfMatchingLetters(String word, int n) {
+        HashMap<String, Integer> allMatches = getWordsNumberOfMatchingLetters(word);
+        int mapSize = allMatches.size();
+        if (mapSize >= n){
+            return (HashMap<String, Integer>) allMatches.entrySet().stream()
+                    .limit(n)
+                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        }
+        else {
+            throw new ResourceNotFound(String.format("Only %s matching words for \'%s\'", mapSize, word));
+        }
     }
 }
