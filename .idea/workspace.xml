@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5176d752-4e8d-4711-be36-47ac58b91f63" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/server_side/app/src/main/java/com/relatedWords/app/word/WordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server_side/app/src/main/java/com/relatedWords/app/word/WordController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server_side/app/src/main/java/com/relatedWords/app/word/WordService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server_side/app/src/main/java/com/relatedWords/app/word/WordService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server_side/app/src/test/java/com/relatedWords/app/wordTests/WordServiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/server_side/app/src/test/java/com/relatedWords/app/wordTests/WordServiceTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,74 +45,7 @@
       <recent name="C:\Users\zeina\Documents\codin\java\relatedWordsAPI\server_side\app\src\main\resources\db\migration" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.AppApplication">
-    <configuration name="AppApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.relatedWords.app.AppApplication" />
-      <module name="app" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.relatedWords.app.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Feature: word" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
-      <option name="CUCUMBER_CORE_VERSION" value="5" />
-      <option name="FILE_PATH" value="$PROJECT_DIR$/server_side/app/src/test/resources/word.feature" />
-      <option name="GLUE" value="com.relatedWords.app" />
-      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
-      <module name="app" />
-      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter" />
-      <option name="SUGGESTED_NAME" value="Feature: word" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="io.cucumber.core.cli.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Scenario: When word id is passed that word is retrieved from the database" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
-      <option name="CUCUMBER_CORE_VERSION" value="5" />
-      <option name="FILE_PATH" value="$PROJECT_DIR$/server_side/app/src/test/resources/word.feature" />
-      <option name="GLUE" value="com.relatedWords.app" />
-      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
-      <module name="app" />
-      <option name="NAME_FILTER" value="^When word id is passed that word is retrieved from the database$" />
-      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^When word id is passed that word is retrieved from the database$&quot;" />
-      <option name="SUGGESTED_NAME" value="Scenario: When word id is passed that word is retrieved from the database" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="io.cucumber.core.cli.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CucumberIntegration" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="app" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.relatedWords.app.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.relatedWords.app" />
-      <option name="MAIN_CLASS_NAME" value="com.relatedWords.app.CucumberIntegration" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.WordServiceTests">
     <configuration name="WordServiceTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="app" />
       <extension name="coverage">
@@ -127,13 +61,77 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="WordServiceTests.gettingNWordsWithMatchingLettersReturnCorrectNumberOfMatches" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.relatedWords.app.wordTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.relatedWords.app.wordTests" />
+      <option name="MAIN_CLASS_NAME" value="com.relatedWords.app.wordTests.WordServiceTests" />
+      <option name="METHOD_NAME" value="gettingNWordsWithMatchingLettersReturnCorrectNumberOfMatches" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WordServiceTests.gettingNWordsWithMatchingLettersThrowsExceptionForNoMatches" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.relatedWords.app.wordTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.relatedWords.app.wordTests" />
+      <option name="MAIN_CLASS_NAME" value="com.relatedWords.app.wordTests.WordServiceTests" />
+      <option name="METHOD_NAME" value="gettingNWordsWithMatchingLettersThrowsExceptionForNoMatches" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WordServiceTests.gettingWordsWithMatchingLettersReturnsNWordsWithMatchIndices" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.relatedWords.app.wordTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.relatedWords.app.wordTests" />
+      <option name="MAIN_CLASS_NAME" value="com.relatedWords.app.wordTests.WordServiceTests" />
+      <option name="METHOD_NAME" value="gettingWordsWithMatchingLettersReturnsNWordsWithMatchIndices" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WordServiceTests.gettingWordsWithMatchingLettersThrowsExceptionForNoMatches" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.relatedWords.app.wordTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.relatedWords.app.wordTests" />
+      <option name="MAIN_CLASS_NAME" value="com.relatedWords.app.wordTests.WordServiceTests" />
+      <option name="METHOD_NAME" value="gettingWordsWithMatchingLettersThrowsExceptionForNoMatches" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.AppApplication" />
-        <item itemvalue="Cucumber Java.Feature: word" />
-        <item itemvalue="JUnit.CucumberIntegration" />
-        <item itemvalue="Cucumber Java.Scenario: When word id is passed that word is retrieved from the database" />
         <item itemvalue="JUnit.WordServiceTests" />
+        <item itemvalue="JUnit.WordServiceTests.gettingNWordsWithMatchingLettersReturnCorrectNumberOfMatches" />
+        <item itemvalue="JUnit.WordServiceTests.gettingNWordsWithMatchingLettersThrowsExceptionForNoMatches" />
+        <item itemvalue="JUnit.WordServiceTests.gettingWordsWithMatchingLettersThrowsExceptionForNoMatches" />
+        <item itemvalue="JUnit.WordServiceTests.gettingWordsWithMatchingLettersReturnsNWordsWithMatchIndices" />
       </list>
     </recent_temporary>
   </component>

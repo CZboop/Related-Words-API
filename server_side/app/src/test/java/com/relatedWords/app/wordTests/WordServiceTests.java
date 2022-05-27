@@ -5,13 +5,11 @@ import com.relatedWords.app.word.POS;
 import com.relatedWords.app.word.Word;
 import com.relatedWords.app.word.WordDataAccessService;
 import com.relatedWords.app.word.WordService;
+import io.cucumber.java.bs.A;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -264,5 +262,131 @@ public class WordServiceTests {
         int expected = 1;
 
         assertEquals(actual, expected);
+    }
+
+//    get words same length - success
+    @Test
+    void gettingWordsOfSameLengthReturnsListFromDAOForValidCall(){
+        Word word1 = new Word(1,"word", "noun", "word".length());
+        Word word2 = new Word(2,"sentence", "noun", "sentence".length());
+        Word word3 = new Word(3,"text", "noun", "text".length());
+        ArrayList<Word> sameLenWordsList = new ArrayList<>(List.of(word1, word2, word3));
+        when(mockWordRepository.getWordsSameLen("word")).thenReturn(Optional.of(sameLenWordsList));
+        ArrayList<Word> expected = sameLenWordsList;
+        ArrayList<Word> actual = underTest.getWordsSameLen("word");
+        assertEquals(actual, expected);
+    }
+
+//    get words same length - failure
+    @Test
+    void gettingWordsOfSameLengthThrowsExceptionForInvalidCall(){
+        when(mockWordRepository.getWordsSameLen("word")).thenReturn(Optional.ofNullable(null));
+        assertThatThrownBy(() -> underTest.getWordsSameLen("word"))
+                .isInstanceOf(ResourceNotFound.class)
+                .hasMessageContaining(String.format("Could not find any similar words to \'word\'"));
+    }
+
+//    get words with number of matching letters - success
+    @Test
+    void gettingWordsWithNumberOfMatchingLettersReturnsWordsAndMatchNumber(){
+        Word word1 = new Word(1,"worddddd", "noun", "worddddd".length());
+        Word word2 = new Word(2,"sentence", "noun", "sentence".length());
+        Word word3 = new Word(3,"texttttt", "noun", "texttttt".length());
+        ArrayList<Word> sameLenWordsList = new ArrayList<>(List.of(word1, word2, word3));
+        when(mockWordRepository.getWordsSameLen("worddddd")).thenReturn(Optional.of(sameLenWordsList));
+        HashMap<String, Integer> expected = new HashMap<>(Map.of("worddddd", 8));
+        HashMap<String, Integer> actual = underTest.getWordsNumberOfMatchingLetters("worddddd");
+        assertEquals(actual, expected);
+    }
+
+//    get words with number of matching letters - failure
+    @Test
+    void gettingWordsWithNumberOfMatchingLettersThrowsCorrectExceptionForNoMatches(){
+        Word word1 = new Word(1,"worddddd", "noun", "worddddd".length());
+        Word word2 = new Word(2,"sentence", "noun", "sentence".length());
+        Word word3 = new Word(3,"texttttt", "noun", "texttttt".length());
+        ArrayList<Word> sameLenWordsList = new ArrayList<>(List.of(word1, word2, word3));
+        when(mockWordRepository.getWordsSameLen("enummmmm")).thenReturn(Optional.of(sameLenWordsList));
+        assertThatThrownBy(() -> underTest.getWordsNumberOfMatchingLetters("enummmmm"))
+                .isInstanceOf(ResourceNotFound.class).hasMessageContaining("No words with letter overlaps for \'enummmmm\'");
+    }
+
+//    get n number of words with number of matching letters - success
+    @Test
+    void gettingNWordsWithNumberOfMatchingLettersReturnsNWordsWithMatchNumber(){
+        Word word1 = new Word(1,"worddddd", "noun", 8);
+        Word word2 = new Word(2,"senddddd", "noun", 8);
+        Word word3 = new Word(3,"texttddd", "noun", 8);
+        ArrayList<Word> sameLenWordsList = new ArrayList<>(List.of(word1, word2, word3));
+        when(mockWordRepository.getWordsSameLen("worddddd")).thenReturn(Optional.of(sameLenWordsList));
+        int expected = 2;
+        int actual = underTest.getNWordsNumberOfMatchingLetters("worddddd", expected).size();
+        assertEquals(actual, expected);
+    }
+
+//    get n number of words with number of matching letters - failure
+    @Test
+    void gettingNWordsWithNumberOfMatchingLettersReturnsThrowsCorrectExceptionForNoMatches(){
+        Word word1 = new Word(1,"worddddd", "noun", 8);
+        Word word2 = new Word(2,"senddddd", "noun", 8);
+        Word word3 = new Word(3,"texttddd", "noun", 8);
+        ArrayList<Word> sameLenWordsList = new ArrayList<>(List.of(word1, word2, word3));
+        when(mockWordRepository.getWordsSameLen("zzzzzzzz")).thenReturn(Optional.of(sameLenWordsList));
+        assertThatThrownBy( () -> underTest.getNWordsNumberOfMatchingLetters("zzzzzzzz", 2))
+                .isInstanceOf(ResourceNotFound.class)
+                .hasMessageContaining("No words with letter overlaps for \'zzzzzzzz\'");
+    }
+
+//    get words with position of matching letters - success
+    @Test
+    void gettingWordsWithMatchingLettersReturnsNWordsWithMatchIndices(){
+        Word word1 = new Word(1,"worddddd", "noun", 8);
+        Word word2 = new Word(2,"senddddd", "noun", 8);
+        Word word3 = new Word(3,"texttddd", "noun", 8);
+        ArrayList<Word> sameLenWordsList = new ArrayList<>(List.of(word1, word2, word3));
+        when(mockWordRepository.getWordsSameLen("worddddd")).thenReturn(Optional.of(sameLenWordsList));
+        HashMap<String, ArrayList> expected = new HashMap<>(Map.of("worddddd", new ArrayList(List.of(0, 1, 2, 3, 4, 5, 6, 7)),
+                "senddddd", new ArrayList(List.of(3, 4, 5, 6, 7)), "texttddd", new ArrayList(List.of(5, 6, 7))));
+        HashMap<String, ArrayList> actual = underTest.getWordsPositionOfMatchingLetters("worddddd");
+        assertEquals(actual, expected);
+    }
+
+//    get words with position of matching letters - failure
+    @Test
+    void gettingWordsWithMatchingLettersThrowsExceptionForNoMatches(){
+        Word word1 = new Word(1,"worddddd", "noun", 8);
+        Word word2 = new Word(2,"senddddd", "noun", 8);
+        Word word3 = new Word(3,"texttddd", "noun", 8);
+        ArrayList<Word> sameLenWordsList = new ArrayList<>(List.of(word1, word2, word3));
+        when(mockWordRepository.getWordsSameLen("zzzzzzzz")).thenReturn(Optional.of(sameLenWordsList));
+        assertThatThrownBy(() -> underTest.getWordsPositionOfMatchingLetters("zzzzzzzz"))
+                .isInstanceOf(ResourceNotFound.class)
+                .hasMessageContaining("No words with letter overlaps for \'zzzzzzzz\'");
+    }
+
+//    get n words with position of matching letters - success
+    @Test
+    void gettingNWordsWithMatchingLettersReturnCorrectNumberOfMatches(){
+        Word word1 = new Word(1,"worddddd", "noun", 8);
+        Word word2 = new Word(2,"senddddd", "noun", 8);
+        Word word3 = new Word(3,"texttddd", "noun", 8);
+        ArrayList<Word> sameLenWordsList = new ArrayList<>(List.of(word1, word2, word3));
+        when(mockWordRepository.getWordsSameLen("worddddd")).thenReturn(Optional.of(sameLenWordsList));
+        int expected = 2;
+        int actual = underTest.getNWordsPositionOfMatchingLetters("worddddd", expected).size();
+        assertEquals(actual, expected);
+    }
+
+//    get n words with position of matching letters - failure
+    @Test
+    void gettingNWordsWithMatchingLettersThrowsExceptionForNoMatches(){
+        Word word1 = new Word(1,"worddddd", "noun", 8);
+        Word word2 = new Word(2,"senddddd", "noun", 8);
+        Word word3 = new Word(3,"texttddd", "noun", 8);
+        ArrayList<Word> sameLenWordsList = new ArrayList<>(List.of(word1, word2, word3));
+        when(mockWordRepository.getWordsSameLen("zzzzzzzz")).thenReturn(Optional.of(sameLenWordsList));
+        assertThatThrownBy(() -> underTest.getNWordsPositionOfMatchingLetters("zzzzzzzz", 4))
+                .isInstanceOf(ResourceNotFound.class)
+                .hasMessageContaining("No words with letter overlaps for \'zzzzzzzz\'");
     }
 }
