@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -59,5 +61,29 @@ public class WordService {
                 (w) -> w.getPartOfSpeech() == targetWord.getPartOfSpeech()).collect(Collectors.toList());
         ArrayList<Word> wordArrayList = new ArrayList<Word>(wordList);
         return wordArrayList;
+    }
+
+    public ArrayList<Word> getWordsSameLen(String word){
+        return wordDAO.getWordsSameLen(word).orElseThrow(
+                () -> new ResourceNotFound(String.format("Could not find any similar words to \'%s\'", word))
+        );
+    }
+
+    public HashMap<String, Integer> getWordsNumberOfMatchingLetters(String word) {
+        ArrayList<String> possibleWords = (ArrayList<String>) getWordsSameLen(word).stream()
+                .map(Word::getValue).collect(Collectors.toList());
+        int len = word.length();
+        HashMap<String, Integer> letterOverlaps = new HashMap<>();
+        for (String comparisonWord : possibleWords){
+            int letterMatchCount = 0;
+            for (int i = 0; i < len; i++){
+                if (word.charAt(i)==comparisonWord.charAt(i)){
+                    letterMatchCount += 1;
+                }
+            }
+            letterOverlaps.put(comparisonWord, letterMatchCount);
+        }
+        return (HashMap<String, Integer>) letterOverlaps.entrySet().stream().filter(a->a.getValue() > 0)
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 }

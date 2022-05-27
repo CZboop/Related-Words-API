@@ -11,4 +11,6 @@ public interface WordDAO {
     Optional<ArrayList<Integer>> getRelatedWordIds(int id);
 
     Optional<Word> getWordByTextValue(String word);
+
+    Optional<ArrayList<Word>> getWordsSameLen(String word);
 }

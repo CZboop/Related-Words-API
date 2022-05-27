@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -52,5 +53,13 @@ public class WordDataAccessService implements WordDAO {
                 """;
         return Optional.of((ArrayList<Integer>) jdbcTemplate.query(sql, relatedWordIdExtractor, id));
 
+    }
+
+    @Override
+    public Optional<ArrayList<Word>> getWordsSameLen(String word){
+        String sql = """
+                SELECT * FROM words WHERE length = ?;
+                """;
+        return Optional.of(new ArrayList<Word>(jdbcTemplate.query(sql,wordRowMapper ,word.length())));
     }
 }

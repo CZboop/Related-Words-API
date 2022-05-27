@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("api/word")
@@ -30,13 +31,18 @@ public class WordController {
         return wordService.getRelatedWords(word);
     }
 
-    @GetMapping("related/{word}/random")
+    @GetMapping("/related/{word}/random")
     public Word getRandomRelatedWord(@PathVariable String word){
         return wordService.getRandomRelatedWord(word);
     }
 
-    @GetMapping("related/{word}/pos")
+    @GetMapping("/related/{word}/pos")
     public ArrayList<Word> getRelatedWordsSamePOS(@PathVariable String word){
         return wordService.getRelatedWordsSamePOS(word);
+    }
+
+    @GetMapping("/letters/{word}")
+    public HashMap<String, Integer> getWordsNumberOfMatchingLetters(@PathVariable String word){
+        return wordService.getWordsNumberOfMatchingLetters(word);
     }
 }
