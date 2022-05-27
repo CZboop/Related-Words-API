@@ -4,6 +4,7 @@ import com.relatedWords.app.exception.ResourceNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -103,5 +104,21 @@ public class WordService {
         else {
             throw new ResourceNotFound(String.format("Only %s matching words for \'%s\'", mapSize, word));
         }
+    }
+
+    public HashMap<String, ArrayList> getWordsPositionOfMatchingLetters(String word) {
+        HashMap<String, Integer> allMatches = getWordsNumberOfMatchingLetters(word);
+        HashMap<String, ArrayList> matchWPositions = new HashMap<>();
+        List<String> allMatchWords = allMatches.keySet().stream().toList();
+        for (String comparisonWord: allMatchWords){
+            ArrayList<Integer> matchInds = new ArrayList<>();
+            for (int i=0 ; i < word.length(); i++){
+                if (comparisonWord.charAt(i)==(word.charAt(i))){
+                    matchInds.add(i);
+                }
+            }
+            matchWPositions.put(comparisonWord, matchInds);
+        }
+        return matchWPositions;
     }
 }
