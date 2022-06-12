@@ -35,7 +35,7 @@ public class WordDataAccessService implements WordDAO {
         String sql = """
                 INSERT INTO words (text_value, part_of_speech, length) VALUES (?, ?, ?);
                 """;
-        return jdbcTemplate.update(sql, word.getValue(), word.getPartOfSpeech().name(), word.getLength());
+        return jdbcTemplate.update(sql, word.getValue().toLowerCase(), word.getPartOfSpeech().name(), word.getLength());
     }
 
     @Override
@@ -43,7 +43,7 @@ public class WordDataAccessService implements WordDAO {
         String sql = """
                 SELECT * FROM words WHERE text_value = ?;
                 """;
-        return jdbcTemplate.query(sql, wordRowMapper, word).stream().findFirst();
+        return jdbcTemplate.query(sql, wordRowMapper, word.toLowerCase()).stream().findFirst();
     }
 
     @Override

@@ -41,7 +41,9 @@ public class WordService {
             Word relatedWord = getWordById(id);
             relatedWords.add(relatedWord);
         }
-        return relatedWords;
+        return (ArrayList<Word>) relatedWords.stream().filter(w ->
+                        !w.getValue().startsWith(word) && !word.startsWith(w.getValue()))
+                .collect(Collectors.toList());
     }
 
     public Word getWordByTextValue(String word) {
